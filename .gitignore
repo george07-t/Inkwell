@@ -24,3 +24,4 @@ yarn-error.log*
 
 # Keep .env for production deployment, but ignore .env.local
 .env.local
+.env
