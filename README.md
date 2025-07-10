@@ -1,70 +1,164 @@
-# Getting Started with Create React App
+# 📖 Inkwell - Blogging Platform Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive React frontend for the Inkwell blogging platform. Built with React, React Router, and Axios for seamless communication with the Django REST Framework backend.
 
-## Available Scripts
+## ✨ Features
 
-In the project directory, you can run:
+- **User Authentication**: Register, login, and logout functionality
+- **Article Management**: Create, edit, delete, and view articles
+- **Rich Editor**: Write and format articles with estimated reading time
+- **Responsive Design**: Works beautifully on desktop and mobile devices
+- **Draft System**: Save articles as drafts or publish immediately
+- **User Dashboard**: Manage your articles in a dedicated dashboard
+- **Public Feed**: Browse published articles from all users
+- **SEO Friendly**: Article URLs use human-readable slugs
+
+## 🛠️ Tech Stack
+
+- **React 19.1.0** - Frontend framework
+- **React Router DOM** - Client-side routing
+- **Axios** - HTTP client for API communication
+- **CSS3** - Custom styling with responsive design
+- **Context API** - State management for authentication
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- Django backend running on `http://127.0.0.1:8000`
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd inkwell-frontend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm start
+   ```
+
+4. **Open your browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── auth/
+│   │   ├── Login.jsx           # User login form
+│   │   └── Register.jsx        # User registration form
+│   ├── articles/
+│   │   ├── ArticleDetail.jsx   # Single article view
+│   │   ├── CreateArticle.jsx   # Article creation form
+│   │   └── EditArticle.jsx     # Article editing form
+│   ├── layout/
+│   │   └── Layout.jsx          # Main layout with navigation
+│   └── common/
+│       └── ProtectedRoute.jsx  # Route protection component
+├── pages/
+│   ├── Home.jsx                # Homepage with article list
+│   └── MyArticles.jsx          # User's article dashboard
+├── services/
+│   ├── api.jsx                 # Axios instance configuration
+│   ├── authService.jsx         # Authentication API calls
+│   └── articleServices.jsx     # Article API calls
+├── context/
+│   └── AuthContext.jsx         # Authentication context
+├── App.js                      # Main app component with routing
+└── index.js                    # Application entry point
+```
+
+## 🔧 Available Scripts
 
 ### `npm start`
-
-Runs the app in the development mode.\
+Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.
 
 ### `npm run build`
-
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The build is optimized for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🌐 API Integration
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The frontend communicates with a Django REST Framework backend:
 
-### `npm run eject`
+- **Base URL**: `http://127.0.0.1:8000/api`
+- **Authentication**: Token-based authentication
+- **CORS**: Properly configured for cross-origin requests
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### API Endpoints Used
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `POST /auth/register/` - User registration
+- `POST /auth/login/` - User login
+- `GET /articles/` - List published articles
+- `POST /articles/` - Create new article
+- `GET /articles/{slug}/` - Get article by slug
+- `PUT /articles/{id}/` - Update article
+- `DELETE /articles/{id}/` - Delete article
+- `GET /articles/my_articles/` - Get user's articles
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🎨 Features Showcase
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Authentication System
+- Secure token-based authentication
+- Form validation with error handling
+- Persistent login state
+- Protected routes for authenticated users
 
-## Learn More
+### Article Management
+- Rich text editor for content creation
+- Auto-generated slugs from titles
+- Draft and publish status options
+- Estimated reading time calculation
+- Responsive article cards
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### User Experience
+- Intuitive navigation with breadcrumbs
+- Loading states and error handling
+- Mobile-responsive design
+- Clean, modern UI
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔗 Related Projects
 
-### Code Splitting
+- **Backend**: [Inkwell Django Backend](../inkwell/README.md)
+- **API Documentation**: Available at `/api/` when backend is running
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📝 Environment Configuration
 
-### Analyzing the Bundle Size
+Create a `.env` file in the root directory for custom configuration:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```env
+REACT_APP_API_BASE_URL=http://127.0.0.1:8000/api
+```
 
-### Making a Progressive Web App
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-### Advanced Configuration
+## 📄 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is licensed under the MIT License.
 
-### Deployment
+## 🙏 Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Built with [Create React App](https://github.com/facebook/create-react-app)
+- Icons and emojis for enhanced user experience
+- Responsive design patterns for modern web applications
