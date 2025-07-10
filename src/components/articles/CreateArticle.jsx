@@ -20,18 +20,18 @@ const CreateArticle = () => {
     });
   };
 
-  // Always send ISO string or null for publish_date
-  const getPublishDateValue = () => {
-    if (!formData.publish_date) return null;
-    // Already in 'YYYY-MM-DDTHH:mm' from input, so just return as is
-    return formData.publish_date;
-  };
+  // Just return the string from the input, do NOT convert to Date or ISO
+const getPublishDateValue = () => {
+  if (!formData.publish_date) return null;
+  // Convert local datetime-local string to UTC ISO string
+  const local = new Date(formData.publish_date);
+  return local.toISOString();
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setErrors({});
-
     try {
       const submitData = {
         title: formData.title,

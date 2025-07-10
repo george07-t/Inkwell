@@ -54,10 +54,12 @@ const EditArticle = () => {
   };
 
   // Always send ISO string or null for publish_date
-  const getPublishDateValue = () => {
-    if (!formData.publish_date) return null;
-    return formData.publish_date;
-  };
+const getPublishDateValue = () => {
+  if (!formData.publish_date) return null;
+  // Convert local datetime-local string to UTC ISO string
+  const local = new Date(formData.publish_date);
+  return local.toISOString();
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
