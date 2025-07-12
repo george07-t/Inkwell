@@ -16,7 +16,7 @@ const Home = () => {
   const fetchArticles = async (page) => {
     try {
       setLoading(true);
-      const response = await articleService.getArticles(page);
+      const response = await articleService.getPublicArticles(page);
       setArticles(response.results);
       setTotalPages(Math.ceil(response.count / 10));
     } catch (error) {
@@ -43,10 +43,10 @@ const Home = () => {
         <h1>Welcome to Inkwell</h1>
         <p>Discover amazing stories from our community of writers</p>
       </div>
-      
+
       <div className="articles-section">
         <h2>Latest Articles</h2>
-        
+
         {articles.length === 0 ? (
           <div className="no-articles">
             <p>No articles published yet. Be the first to share your story!</p>
@@ -61,7 +61,7 @@ const Home = () => {
                       {article.title}
                     </Link>
                   </h3>
-                  
+
                   <div className="article-meta">
                     <span className="article-author">
                       By {article.author_username}
@@ -73,9 +73,9 @@ const Home = () => {
                       {article.estimated_read_time} min read
                     </span>
                   </div>
-                  
+
                   <div className="article-actions">
-                    <Link 
+                    <Link
                       to={`/articles/${article.slug}`}
                       className="btn btn-outline"
                     >
@@ -95,11 +95,11 @@ const Home = () => {
                 >
                   Previous
                 </button>
-                
+
                 <span className="pagination-info">
                   Page {currentPage} of {totalPages}
                 </span>
-                
+
                 <button
                   onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                   disabled={currentPage === totalPages}

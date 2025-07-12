@@ -14,7 +14,6 @@ const ArticleDetail = () => {
   useEffect(() => {
     fetchArticle();
   }, [slug]);
-
   const fetchArticle = async () => {
     try {
       setLoading(true);
@@ -36,14 +35,13 @@ const ArticleDetail = () => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this article?')) {
       try {
-        await articleService.deleteArticle(article.id);
+        await articleService.deleteMyArticle(article.id);
         navigate('/my-articles');
       } catch (error) {
         setError('Failed to delete article');
       }
     }
   };
-
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -65,7 +63,7 @@ const ArticleDetail = () => {
       <article className="article-content">
         <header className="article-header">
           <h1 className="article-title">{article.title}</h1>
-          
+
           <div className="article-meta">
             <div className="meta-left">
               <span className="article-author">
@@ -78,7 +76,7 @@ const ArticleDetail = () => {
                 {article.estimated_read_time} min read
               </span>
             </div>
-            
+
             {article.status === 'draft' && (
               <div className="draft-badge">
                 📝 Draft
@@ -88,13 +86,13 @@ const ArticleDetail = () => {
 
           {isAuthor && (
             <div className="author-actions">
-              <Link 
+              <Link
                 to={`/edit-article/${article.id}`}
                 className="btn btn-secondary"
               >
                 ✏️ Edit Article
               </Link>
-              <button 
+              <button
                 onClick={handleDelete}
                 className="btn btn-danger"
               >

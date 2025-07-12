@@ -20,11 +20,10 @@ const EditArticle = () => {
     fetchArticle();
     // eslint-disable-next-line
   }, [id]);
-
   const fetchArticle = async () => {
     try {
       setFetchLoading(true);
-      const response = await articleService.getArticle(id);
+      const response = await articleService.getMyArticle(id);
       setOriginalArticle(response);
 
       // Format publish_date for datetime-local input
@@ -45,7 +44,6 @@ const EditArticle = () => {
       setFetchLoading(false);
     }
   };
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -54,13 +52,12 @@ const EditArticle = () => {
   };
 
   // Always send ISO string or null for publish_date
-const getPublishDateValue = () => {
-  if (!formData.publish_date) return null;
-  // Convert local datetime-local string to UTC ISO string
-  const local = new Date(formData.publish_date);
-  return local.toISOString();
-};
-
+  const getPublishDateValue = () => {
+    if (!formData.publish_date) return null;
+    // Convert local datetime-local string to UTC ISO string
+    const local = new Date(formData.publish_date);
+    return local.toISOString();
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -73,7 +70,7 @@ const getPublishDateValue = () => {
         status: formData.status,
         publish_date: formData.status === 'draft' && getPublishDateValue() ? getPublishDateValue() : null,
       };
-      const response = await articleService.updateArticle(id, submitData);
+      const response = await articleService.updateMyArticle(id, submitData);
       navigate(`/articles/${response.slug}`);
     } catch (error) {
       setErrors(error.response?.data || { general: 'Failed to update article' });
@@ -81,7 +78,6 @@ const getPublishDateValue = () => {
       setLoading(false);
     }
   };
-
   // Always save as draft, regardless of dropdown
   const handleSaveAsDraft = async () => {
     setLoading(true);
@@ -93,7 +89,7 @@ const getPublishDateValue = () => {
         status: 'draft',
         publish_date: getPublishDateValue(),
       };
-      const response = await articleService.updateArticle(id, submitData);
+      const response = await articleService.updateMyArticle(id, submitData);
       navigate(`/articles/${response.slug}`);
     } catch (error) {
       setErrors(error.response?.data || { general: 'Failed to update article' });

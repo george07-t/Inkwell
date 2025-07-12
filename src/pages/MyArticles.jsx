@@ -26,14 +26,13 @@ const MyArticles = () => {
   const handleDelete = async (articleId) => {
     if (window.confirm('Are you sure you want to delete this article?')) {
       try {
-        await articleService.deleteArticle(articleId);
+        await articleService.deleteMyArticle(articleId);
         setArticles(articles.filter(article => article.id !== articleId));
       } catch (error) {
         setError('Failed to delete article');
       }
     }
   };
-
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -90,21 +89,21 @@ const MyArticles = () => {
                   </span>
                 </div>
               </div>
-              
+
               <div className="article-actions">
-                <Link 
+                <Link
                   to={`/articles/${article.slug}`}
                   className="btn btn-outline"
                 >
                   View
                 </Link>
-                <Link 
+                <Link
                   to={`/edit-article/${article.id}`}
                   className="btn btn-secondary"
                 >
                   Edit
                 </Link>
-                <button 
+                <button
                   onClick={() => handleDelete(article.id)}
                   className="btn btn-danger"
                 >
